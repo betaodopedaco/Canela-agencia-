@@ -108,20 +108,22 @@ header {
   gap: 15px;
   position: relative;
   transition: var(--transition);
+  /* Ajustado z-index para evitar que a logo passe por cima de outros elementos */
+  z-index: 1001; 
 }
 
 /* Logo com destaque especial */
 .logo-text {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.2rem, 4.5vw, 3.2rem); /* Tamanho aumentado */
-  font-weight: 900; /* Mais peso para destaque */
+  font-family: 'Playfair Display', serif; /* Mantido o Playfair Display, que é chamativo */
+  font-size: clamp(1.6rem, 3.5vw, 2.8rem); /* Levemente diminuído do anterior */
+  font-weight: 900; /* Mantido mais peso para destaque */
   letter-spacing: 1.5px;
-  background: linear-gradient(45deg, var(--deep-purple), var(--orange)); /* Mesmo gradiente do botão */
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  /* Cor branca pura, removido o gradiente */
+  color: var(--light-text); 
+  /* Removido -webkit-background-clip e background-clip, pois não há gradiente de texto */
+  /* Removido color: transparent; */
   position: relative;
-  text-shadow: 0 0 15px rgba(74, 0, 224, 0.3);
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.1); /* Sombra sutil para destaque */
   transition: var(--transition);
   animation: logo-appear 1.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
@@ -142,13 +144,13 @@ header {
 /* Efeito de brilho sutil */
 .logo-container::after {
   content: '';
-  position: absolute;
+  position: absolute; /* Mantido absolute para o brilho */
   top: -5px;
   left: -5px;
   right: -5px;
   bottom: -5px;
-  background: linear-gradient(45deg, var(--deep-purple), var(--orange));
-  z-index: -1;
+  background: rgba(255, 255, 255, 0.1); /* Brilho mais sutil em branco */
+  z-index: -1; /* Mantido para que o brilho fique atrás do texto */
   opacity: 0.2;
   border-radius: 10px;
   filter: blur(15px);
@@ -156,14 +158,14 @@ header {
 }
 
 @keyframes logo-glow {
-  0% { opacity: 0.2; }
-  100% { opacity: 0.35; }
+  0% { opacity: 0.1; } /* Ajustei a opacidade do brilho */
+  100% { opacity: 0.25; } /* Ajustei a opacidade do brilho */
 }
 
 .logo-container:hover .logo-text {
   transform: scale(1.05);
-  text-shadow: 0 0 20px var(--deep-purple), 
-               0 0 30px rgba(255, 107, 53, 0.4);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3), /* Ajustado para branco */
+               0 0 30px rgba(255, 255, 255, 0.2); /* Ajustado para branco */
 }
 
 .nav-menu {
@@ -261,10 +263,6 @@ header {
 .cta-button:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 30px rgba(74, 0, 224, 0.6);
-}
-
-.cta-button:hover::before {
-  opacity: 1;
 }
 
 .cta-button.secondary {
@@ -849,13 +847,13 @@ footer {
   }
   
   .logo-text {
-    font-size: 2.2rem;
+    font-size: 2.0rem; /* Ajustado para telas menores */
   }
 }
 
 @media (max-width: 576px) {
   .logo-text {
-    font-size: 1.9rem;
+    font-size: 1.7rem; /* Ajustado para telas muito pequenas */
   }
   
   .hero-stats {
