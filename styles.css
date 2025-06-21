@@ -105,31 +105,65 @@ header {
 .logo-container {
   display: flex;
   align-items: center;
-  /* Reduzi o gap, já que não tem imagem */
-  gap: 0px; 
+  gap: 15px;
+  position: relative;
+  transition: var(--transition);
 }
 
-/* Removidas as regras para .logo-img, já que a imagem foi removida */
-/*
-.logo-img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--turquoise);
-}
-*/
-
+/* Logo com destaque especial */
 .logo-text {
   font-family: 'Playfair Display', serif;
-  /* Aumentei o font-size aqui */
-  font-size: clamp(1.8rem, 3vw, 2.5rem); 
-  font-weight: 700;
-  letter-spacing: 1px;
-  background: linear-gradient(90deg, var(--turquoise), var(--deep-purple));
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem); /* Tamanho aumentado */
+  font-weight: 900; /* Mais peso para destaque */
+  letter-spacing: 1.5px;
+  background: linear-gradient(45deg, var(--deep-purple), var(--orange)); /* Mesmo gradiente do botão */
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  position: relative;
+  text-shadow: 0 0 15px rgba(74, 0, 224, 0.3);
+  transition: var(--transition);
+  animation: logo-appear 1.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+@keyframes logo-appear {
+  0% {
+    filter: blur(12px);
+    opacity: 0;
+    letter-spacing: 8px;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+    letter-spacing: 1.5px;
+  }
+}
+
+/* Efeito de brilho sutil */
+.logo-container::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(45deg, var(--deep-purple), var(--orange));
+  z-index: -1;
+  opacity: 0.2;
+  border-radius: 10px;
+  filter: blur(15px);
+  animation: logo-glow 3s infinite alternate;
+}
+
+@keyframes logo-glow {
+  0% { opacity: 0.2; }
+  100% { opacity: 0.35; }
+}
+
+.logo-container:hover .logo-text {
+  transform: scale(1.05);
+  text-shadow: 0 0 20px var(--deep-purple), 
+               0 0 30px rgba(255, 107, 53, 0.4);
 }
 
 .nav-menu {
@@ -227,6 +261,10 @@ header {
 .cta-button:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 30px rgba(74, 0, 224, 0.6);
+}
+
+.cta-button:hover::before {
+  opacity: 1;
 }
 
 .cta-button.secondary {
@@ -528,9 +566,8 @@ header {
   padding: 100px 0;
   display: grid;
   gap: 40px;
-  /* Garante que o container tenha um z-index para empilhar corretamente, se necessário */
   position: relative;
-  z-index: 1; 
+  z-index: 1;
 }
 
 .impact-item {
@@ -542,21 +579,18 @@ header {
   transition: var(--transition);
   transform-style: preserve-3d;
   transform: perspective(1000px);
-  
-  /* Adições para garantir que o conteúdo seja visível */
-  opacity: 1 !important; /* Força a opacidade para 1, ignorando animações que possam escondê-lo */
-  visibility: visible !important; /* Força a visibilidade, ignorando animações que possam escondê-lo */
-  position: relative; /* Garante que o z-index funcione corretamente */
-  z-index: 2; /* Garante que ele fique acima de elementos com z-index menor */
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: relative;
+  z-index: 2;
 }
 
 .impact-item h3 {
   margin-bottom: 20px;
   position: relative;
   padding-left: 30px;
-  /* Certifique-se que o texto tem cor */
   color: var(--light-text);
-  z-index: 3; /* Para garantir que o título apareça sobre o background do item */
+  z-index: 3;
 }
 
 .impact-item h3::before {
@@ -571,14 +605,12 @@ header {
   z-index: 3;
 }
 
-/* O PARÁGRAFO É O TEXTO QUE SUMIA, VAMOS GARANTIR QUE ELE SEMPRE APAREÇA */
 .impact-item p {
-  /* Garante que o texto tenha cor e esteja visível */
-  color: var(--light-text); 
-  opacity: 1 !important; /* Impede que animações ou outras regras o escondam */
-  visibility: visible !important; /* Impede que animações ou outras regras o escondam */
-  position: relative; /* Garante que ele possa ser empilhado */
-  z-index: 3; /* Coloca o texto acima de qualquer background ou elemento menor */
+  color: var(--light-text);
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: relative;
+  z-index: 3;
 }
 
 /* ===== CTA SECTION ===== */
@@ -816,15 +848,14 @@ footer {
     top: -20px;
   }
   
-  /* Ajuste para telas menores */
   .logo-text {
-    font-size: 1.8rem; /* Aumentei um pouco aqui também para mobile */
+    font-size: 2.2rem;
   }
 }
 
 @media (max-width: 576px) {
   .logo-text {
-    font-size: 1.5rem; /* Ajuste para telas muito pequenas */
+    font-size: 1.9rem;
   }
   
   .hero-stats {
