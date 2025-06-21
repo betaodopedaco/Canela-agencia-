@@ -105,9 +105,12 @@ header {
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 15px;
+  /* Reduzi o gap, já que não tem imagem */
+  gap: 0px; 
 }
 
+/* Removidas as regras para .logo-img, já que a imagem foi removida */
+/*
 .logo-img {
   width: 60px;
   height: 60px;
@@ -115,10 +118,12 @@ header {
   object-fit: cover;
   border: 2px solid var(--turquoise);
 }
+*/
 
 .logo-text {
   font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
+  /* Aumentei o font-size aqui */
+  font-size: clamp(1.8rem, 3vw, 2.5rem); 
   font-weight: 700;
   letter-spacing: 1px;
   background: linear-gradient(90deg, var(--turquoise), var(--deep-purple));
@@ -222,10 +227,6 @@ header {
 .cta-button:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 30px rgba(74, 0, 224, 0.6);
-}
-
-.cta-button:hover::before {
-  opacity: 1;
 }
 
 .cta-button.secondary {
@@ -814,11 +815,16 @@ footer {
     font-size: 4rem;
     top: -20px;
   }
+  
+  /* Ajuste para telas menores */
+  .logo-text {
+    font-size: 1.8rem; /* Aumentei um pouco aqui também para mobile */
+  }
 }
 
 @media (max-width: 576px) {
   .logo-text {
-    font-size: 1.2rem;
+    font-size: 1.5rem; /* Ajuste para telas muito pequenas */
   }
   
   .hero-stats {
